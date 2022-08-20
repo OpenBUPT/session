@@ -1,0 +1,9 @@
+include *.in
+include README-py.md
+include requirements.txt
+include LICENSE
+include setup.py
+include .gitignore
+
+global-exclude __pycache__ *.py[cod]
+global-exclude *.so *.dylib

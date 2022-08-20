@@ -1,0 +1,9 @@
+# Common
+build/
+*.egg-info/
+dist/
+
+# Python
+__pycache__
+venv/
+.venv/
