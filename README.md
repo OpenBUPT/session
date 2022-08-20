@@ -4,4 +4,4 @@
 
 ## 支持语言
 
-- [Python 3](./README-py.md)
+- [Python 3](./README-py.md): https://pypi.org/project/bupt-session/
