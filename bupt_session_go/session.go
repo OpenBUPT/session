@@ -29,7 +29,15 @@ func Login(client *http.Client, username, password string) (*http.Client, error)
 
 	// 获取登录用的 execution 参数
 	resp, err := client.Get(loginUrl)
+	if err != nil {
+		return nil, err
+	}
+
 	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
 	re := regexp.MustCompile(`<input name="execution" value="[0-9a-zA-Z-=_]+"`)
 	findExecution := re.FindAll(body, -1)
 	execution := strings.Split(string(findExecution[0]), "\"")[3]
