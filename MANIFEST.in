@@ -1,5 +1,5 @@
 include *.in
-include README-py.md
+include bupt_session_py/README.md
 include requirements.txt
 include LICENSE
 include setup.py

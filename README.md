@@ -4,4 +4,5 @@
 
 ## 支持语言
 
-- [Python 3](./README-py.md): https://pypi.org/project/bupt-session/
+- [Python 3](bupt_session_py/README.md): https://pypi.org/project/bupt-session/
+- [Golang](bupt_session_go/README.md): `go get github.com/OpenBUPT/session`
