@@ -1,7 +1,6 @@
-package main
+package bupt_session
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/http/cookiejar"
@@ -9,19 +8,14 @@ import (
 	"strings"
 )
 
-func main() {
-	client := http.Client{}
-	login(&client, "username", "password")
-}
+const loginUrl = "https://auth.bupt.edu.cn/authserver/login"
 
-func login(client *http.Client, username, password string) {
-	urls := make(map[string]string, 0)
-	urls["check"] = "https://auth.bupt.edu.cn/authserver/login"
-	
+func Login(client *http.Client, username, password string) (*http.Client, error) {
+
 	if client.Jar == nil {
 		jar, err := cookiejar.New(nil)
 		if err != nil {
-			panic("Jar init error")
+			return client, err
 		}
 		client.Jar = jar
 	}
@@ -34,17 +28,13 @@ func login(client *http.Client, username, password string) {
 	loginMap["_eventId"] = []string{"submit"}
 
 	// 获取登录用的 execution 参数
-	resp, err := client.Get(urls["check"])
+	resp, err := client.Get(loginUrl)
 	body, err := ioutil.ReadAll(resp.Body)
 	re := regexp.MustCompile(`<input name="execution" value="[0-9a-zA-Z-=_]+"`)
 	findExecution := re.FindAll(body, -1)
 	execution := strings.Split(string(findExecution[0]), "\"")[3]
 	loginMap["execution"] = []string{execution}
 
-	_, err = client.PostForm(urls["check"], loginMap)
-	if err != nil {
-		fmt.Println(err)
-		panic("check error")
-	}
+	_, err = client.PostForm(loginUrl, loginMap)
+	return client, err
 }
-	
