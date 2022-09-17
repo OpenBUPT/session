@@ -5,7 +5,7 @@
 ## Usage
 
 ```python
-from bupt_session_py import Session
+from bupt_session_py.session import Session
 
 session = Session()
 
